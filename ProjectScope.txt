@@ -1,0 +1,5 @@
+REPOS/SOLUTIONS:
+LIHunter: Searches LinkedIn with a list of queries and writes all results to a google sheet
+LIKiller: Applies to all easy apply jobs on LinkedIn from a google sheet and updates the sheet after with which jobs its applied for
+INHunter: Searches Indeed with a list of queries and writes all results to a google sheet
+INKiller: Applies to all easy apply jobs on Indeed from a google sheet and updates the sheet after with which jobs its applied for

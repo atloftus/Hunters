@@ -1,0 +1,6 @@
+C:\Users\AlexanderLoftus\source\repos\Hunters\bin\Debug\netstandard2.0\Hunters.deps.json
+C:\Users\AlexanderLoftus\source\repos\Hunters\bin\Debug\netstandard2.0\Hunters.dll
+C:\Users\AlexanderLoftus\source\repos\Hunters\obj\Debug\netstandard2.0\Hunters.csprojAssemblyReference.cache
+C:\Users\AlexanderLoftus\source\repos\Hunters\obj\Debug\netstandard2.0\Hunters.csproj.CoreCompileInputs.cache
+C:\Users\AlexanderLoftus\source\repos\Hunters\obj\Debug\netstandard2.0\Hunters.AssemblyInfoInputs.cache
+C:\Users\AlexanderLoftus\source\repos\Hunters\obj\Debug\netstandard2.0\Hunters.AssemblyInfo.cs
