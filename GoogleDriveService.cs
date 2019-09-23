@@ -66,7 +66,7 @@ namespace Hunters
 
         #region METHODS
         /// <summary>
-        ///     This method takes in a list of jobs and writes each one as a line item in a google sheet.
+        ///     This method takes in a list of jobs and writes each one as a line item in the google sheet.
         /// </summary>
         /// <param name="jobs"></param>
         /// <returns></returns>
