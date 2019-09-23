@@ -36,7 +36,7 @@ namespace Hunters
         public GoogleDriveService()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
-            var directorySplit = currentDirectory.Split("LIHunter");
+            var directorySplit = currentDirectory.Split(new string[] { "LIHunter" }, StringSplitOptions.None);
             var secretLocation = directorySplit[0] + "client_secrets.json";
 
             using (var stream = new FileStream(secretLocation, FileMode.Open, FileAccess.Read))

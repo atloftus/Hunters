@@ -17,8 +17,8 @@ namespace Hunters
     public class LIService
     {
         #region PROPERTIES
-        public string ChromeDriverRelativePath = (Directory.GetCurrentDirectory().Split("LIHunter"))[0] + @"\LIHunter\chromedriver_win32";
-        public string LIQueriesRelativePath = (Directory.GetCurrentDirectory().Split("LIHunter"))[0] + @"LIHunter\LI_queries.txt";
+        public string ChromeDriverRelativePath = (Directory.GetCurrentDirectory().Split(new string[] { "LIHunter" }, StringSplitOptions.None))[0] + @"\LIHunter\chromedriver_win32";
+        public string LIQueriesRelativePath = (Directory.GetCurrentDirectory().Split(new string[] { "LIHunter" }, StringSplitOptions.None))[0] + @"LIHunter\LI_queries.txt";
         public string UserName { get; set; }
         public string Password { get; set; }
         public string BaseURL { get { return @"https://www.linkedin.com/jobs/search?keywords="; } }
@@ -178,8 +178,8 @@ namespace Hunters
                             if (easyApply != null)
                             {
                                 string link = elm.FindElement(By.TagName("a")).GetAttribute("href");
-                                string[] splitInfo = elm.Text.Split("\r\n");
-                                string[] refidSplit = ((link.Split("?refId="))[0]).Split("-");
+                                string[] splitInfo = elm.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                                string[] refidSplit = ((link.Split(new string[] { "?refId=" }, StringSplitOptions.None))[0]).Split('-');
                                 string refid = refidSplit[refidSplit.Length - 1];
                                 if (splitInfo.Length >= 5)
                                 {
@@ -194,8 +194,8 @@ namespace Hunters
                     else
                     {
                         string link = elm.FindElement(By.TagName("a")).GetAttribute("href");
-                        string[] splitInfo = elm.Text.Split("\r\n");
-                        string[] refidSplit = ((link.Split("?refId="))[0]).Split("-");
+                        string[] splitInfo = elm.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                        string[] refidSplit = ((link.Split(new string[] { "?refId=" }, StringSplitOptions.None))[0]).Split('-');
                         string refid = refidSplit[refidSplit.Length - 1];
                         if (splitInfo.Length >= 5)
                         {
