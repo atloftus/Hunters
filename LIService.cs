@@ -17,10 +17,10 @@ namespace Hunters
     public class LIService
     {
         #region PROPERTIES
-        public string ChromeDriverRelativePath = (Directory.GetCurrentDirectory().Split(new string[] { "LIHunter" }, StringSplitOptions.None))[0] + @"\Hunters\chromedriver_win32";
-        public string LIQueriesRelativePath = (Directory.GetCurrentDirectory().Split(new string[] { "LIHunter" }, StringSplitOptions.None))[0] + @"Hunters\LI_queries.txt";
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string ChromeDriverRelativePath = (Directory.GetCurrentDirectory().Split(new string[] { "repos" }, StringSplitOptions.None))[0] + @"repos\Hunters\chromedriver_win32";
+        public string LIQueriesRelativePath = (Directory.GetCurrentDirectory().Split(new string[] { "repos" }, StringSplitOptions.None))[0] + @"repos\Hunters\LI_queries.txt";
+        //public string UserName { get; set; }
+        //public string Password { get; set; }
         public string BaseURL { get { return @"https://www.linkedin.com/jobs/search?keywords="; } }
         public string BaseSearchParams { get; set; }
         public string AdvancedSearchParams { get; set; }

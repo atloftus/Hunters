@@ -22,6 +22,7 @@ namespace Hunters
         public string Details { get; set; }
         public bool IsEasyApply { get; set; }
         public string RefID { get; set; }
+        public string Website { get; set; } = "LinkedIn";
         #endregion
 
 
@@ -58,6 +59,8 @@ namespace Hunters
             Link = link;
             DatePosted = dateposted;
             Details = details;
+            if (link.Contains("indeed")) Website = "Indeed";
+            else Website = "LinkedIn";
         }
 
 
