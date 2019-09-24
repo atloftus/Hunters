@@ -29,9 +29,9 @@ namespace Hunters
         #region CONSTRUCTORS
         public INService()
         {
-            //TODO: Deal with the fact that you need state abreviation not full name now
+            //TODO: Possibly add some sort of location resolution (maybe a library)
             //TODO: Possibly allow different search radius options
-            //TODO: Add website field to job
+            //TODO: Look into how to shorten LI URLs
             List<object> queries = createINQueries();
             Queries = queries.ToArray();
             FULLURLS = new string[queries.Count];
@@ -130,6 +130,17 @@ namespace Hunters
 
                 Console.WriteLine("Searching for jobs with keyword " + ((INQuery)Queries[counter]).KeyWords + " in the city of " + ((INQuery)Queries[counter]).City + "...");
 
+                int resultCount = getNumberOfSearchResults();
+                Console.WriteLine("The search yielded " + resultCount + " results.");
+                int numberOfPages = (int) Math.Floor(resultCount/10.00);
+                List<string> nextPages = new List<string>();
+
+                for (int a = 1; a <= numberOfPages; a++)
+                {
+                    string tempURL = url + "&start=" + (a*10).ToString();
+                    nextPages.Add(tempURL);
+                }
+
                 Thread.Sleep(2000);
                 System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> holderJobCards = Driver.FindElement(By.XPath("/ html / body / table[2] / tbody / tr / td / table / tbody / tr / td[2]")).FindElements(By.TagName("div"));
                 foreach(IWebElement elm in holderJobCards)
@@ -137,6 +148,17 @@ namespace Hunters
                     if (elm.GetAttribute("class") == "jobsearch-SerpJobCard unifiedRow row result clickcard") createJobFromWebElement(elm);
                 }
 
+
+                foreach(string nextUrl in nextPages)
+                {
+                    Driver.Navigate().GoToUrl(nextUrl);
+                    Thread.Sleep(4000);
+                    holderJobCards = Driver.FindElement(By.XPath("/ html / body / table[2] / tbody / tr / td / table / tbody / tr / td[2]")).FindElements(By.TagName("div"));
+                    foreach (IWebElement elm in holderJobCards)
+                    {
+                        if (elm.GetAttribute("class") == "jobsearch-SerpJobCard unifiedRow row result clickcard") createJobFromWebElement(elm);
+                    }
+                }
 
                 //TODO: Need to implement for multiple pages
 
@@ -151,7 +173,15 @@ namespace Hunters
                     try
                     {
                         Thread.Sleep(1000);
-                        element = Driver.FindElement(By.XPath("/html/body/main/section[1]/button"));
+
+                        //FOR SECOND PAGE
+                        #resultsCol > div.pagination > a:nth-child(8)
+                        /html/body/table[2]/tbody/tr/td/table/tbody/tr/td[2]/div[43]/a[7]
+
+                        //FOR FIRST PAGE
+                        #resultsCol > div.pagination > a:nth-child(6)
+                        /html/body/table[2]/tbody/tr/td/table/tbody/tr/td[2]/div[43]/a[5]
+                        element = Driver.FindElement(By.XPath("//*[@id="resultsCol"]/div[43]/a[5]"));
                         //element = Driver.FindElement(By.XPath("/html/body/main/section[1]/button"));
                         Thread.Sleep(1000);
                         element.Click();
@@ -244,6 +274,19 @@ namespace Hunters
             getRidOfDuplicates();
             return JobResults;
         }
+
+
+
+        public int getNumberOfSearchResults()
+        {
+            var resultElm = Driver.FindElement(By.Id("searchCountPages"));
+            string resultStringFull = resultElm.Text;
+            string[] resultSplit = resultStringFull.Split(' ');
+            string resultString = resultSplit[3];
+            int resultCount = Int32.Parse(resultString);
+            return resultCount;
+        }
+
 
 
         public void createJobFromWebElement(IWebElement elm)
