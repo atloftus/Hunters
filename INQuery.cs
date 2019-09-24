@@ -44,7 +44,7 @@ namespace Hunters
 
 
     /// <summary>
-    ///     This class contains all of the properties of an Advanced LinkedIN Query.
+    ///     This class contains all of the properties of an Advanced Indeed Query.
     /// </summary>
     public class INQueryAdvanced : INQuery
     {
@@ -63,8 +63,8 @@ namespace Hunters
 
 
         /// <summary>
-        ///     This is the advanced construtor that extends the base LIQuery constructor as well as takingi n and setting the advanced search parameters that
-        ///     are the differentiating factors between LIQuery and LIQueryAdvanced.
+        ///     This is the advanced construtor that extends the base INQuery constructor as well as taking in and setting the advanced search parameters that
+        ///     are the differentiating factors between INQuery and INQueryAdvanced.
         /// </summary>
         /// <param name="keywords"></param>
         /// <param name="city"></param>
