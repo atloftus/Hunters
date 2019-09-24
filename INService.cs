@@ -31,7 +31,6 @@ namespace Hunters
         {
             //TODO: Possibly add some sort of location resolution (maybe a library)
             //TODO: Possibly allow different search radius options
-            //TODO: Look into how to shorten LI URLs
             List<object> queries = createINQueries();
             Queries = queries.ToArray();
             FULLURLS = new string[queries.Count];
@@ -93,19 +92,6 @@ namespace Hunters
         }
 
 
-        public void testMthd()
-        {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArguments("--incognito");
-
-            string url;
-            url = FULLURLS[0];
-            OnlyGetEasyAppy = ((INQuery)Queries[0]).OnlyGetEasy;
-            Driver = new ChromeDriver(ChromeDriverRelativePath, options);
-            Driver.Navigate().GoToUrl(url);
-            Thread.Sleep(20000);
-        }
-
         /// <summary>
         ///     This method takes in a string url and searches Indeed with it. It then scraps all of the jobs it finds and casts them
         ///     to Job objects and returns them in a list.
@@ -159,116 +145,7 @@ namespace Hunters
                         if (elm.GetAttribute("class") == "jobsearch-SerpJobCard unifiedRow row result clickcard") createJobFromWebElement(elm);
                     }
                 }
-
-                //TODO: Need to implement for multiple pages
-
-                /*
-                do
-                {
-                    IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-                    var newScrollHeight = (long)js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight); return document.body.scrollHeight;");
-                    if (newScrollHeight == scrollHeight) break;
-                    else scrollHeight = newScrollHeight;
-
-                    try
-                    {
-                        Thread.Sleep(1000);
-
-                        //FOR SECOND PAGE
-                        #resultsCol > div.pagination > a:nth-child(8)
-                        /html/body/table[2]/tbody/tr/td/table/tbody/tr/td[2]/div[43]/a[7]
-
-                        //FOR FIRST PAGE
-                        #resultsCol > div.pagination > a:nth-child(6)
-                        /html/body/table[2]/tbody/tr/td/table/tbody/tr/td[2]/div[43]/a[5]
-                        element = Driver.FindElement(By.XPath("//*[@id="resultsCol"]/div[43]/a[5]"));
-                        //element = Driver.FindElement(By.XPath("/html/body/main/section[1]/button"));
-                        Thread.Sleep(1000);
-                        element.Click();
-                        Thread.Sleep(1000);
-                    }
-                    catch (OpenQA.Selenium.NoSuchElementException ex)
-                    {
-                        try
-                        {
-                            element = Driver.FindElement(By.ClassName("see-more-jobs"));
-                            //element = Driver.FindElement(By.ClassName("see-more-jobs"));
-                            Thread.Sleep(1000);
-                            element.Click();
-                            Thread.Sleep(1000);
-                        }
-                        catch (OpenQA.Selenium.NoSuchElementException ex2)
-                        {
-                            try
-                            {
-                                element = Driver.FindElement(By.CssSelector("body > main > div > section > button"));
-                                //element = Driver.FindElement(By.CssSelector("body > main > div > section > button"));
-                                Thread.Sleep(1000);
-                                element.Click();
-                                Thread.Sleep(1000);
-                            }
-                            catch (OpenQA.Selenium.NoSuchElementException ex3) { break; }
-                        }
-                    }
-                } while (element != null);
-                */
-
-                /*
-                Thread.Sleep(4000);
-                System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> JobCards = Driver.FindElements(By.XPath("/ html / body / table[2] / tbody / tr / td / table / tbody / tr / td[2] /"));
-                Console.WriteLine("first card count: " + JobCards.Count);
-                Thread.Sleep(4000);
-                System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> JobCards2 = Driver.FindElements(By.XPath("/ html / body / table[2] / tbody / tr / td / table / tbody / tr / td[2]"));
-                Console.WriteLine("second card count: " + JobCards2.Count);
-                
-                //System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> JobCards = Driver.FindElements(By.CssSelector("body > main > div > section > ul > li"));
-                if (JobCards.Count == 0)
-                {
-                    Thread.Sleep(5000);
-                    JobCards = Driver.FindElements(By.CssSelector("body > main > div > section > ul > li"));
-                }
-                
-
-                foreach (IWebElement elm in JobCards)
-                {
-                    if (OnlyGetEasyAppy)
-                    {
-                        try
-                        {
-                            var easyApply = elm.FindElement(By.ClassName("job-result-card__easy-apply-label"));
-                            if (easyApply != null)
-                            {
-                                string link = elm.FindElement(By.TagName("a")).GetAttribute("href");
-                                string[] splitInfo = elm.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                                string[] refidSplit = ((link.Split(new string[] { "?refId=" }, StringSplitOptions.None))[0]).Split('-');
-                                string refid = refidSplit[refidSplit.Length - 1];
-                                if (splitInfo.Length >= 5)
-                                {
-                                    string dateposted = splitInfo[4].Replace("Easy Apply", "");
-                                    Job holderJob = new Job(splitInfo[1], splitInfo[0], splitInfo[2], refid, link, dateposted, splitInfo[3], true);
-                                    JobResults.Add(holderJob);
-                                }
-                            }
-                        }
-                        catch (OpenQA.Selenium.NoSuchElementException ex) { }
-                    }
-                    else
-                    {
-                        string link = elm.FindElement(By.TagName("a")).GetAttribute("href");
-                        string[] splitInfo = elm.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                        string[] refidSplit = ((link.Split(new string[] { "?refId=" }, StringSplitOptions.None))[0]).Split('-');
-                        string refid = refidSplit[refidSplit.Length - 1];
-                        if (splitInfo.Length >= 5)
-                        {
-                            string dateposted = splitInfo[4].Replace("Easy Apply", "");
-                            Job holderJob = new Job(splitInfo[1], splitInfo[0], splitInfo[2], refid, link, dateposted, splitInfo[3], false);
-                            JobResults.Add(holderJob);
-                        }
-                    }
-                }
-                Driver.Close();
-                Console.WriteLine("Completed Searching for jobs with keyword " + ((LIQuery)Queries[counter]).KeyWords + " in the city of " + ((LIQuery)Queries[counter]).City + "!");
-                */
+                //TODO: Need to add some error checking to make sure that I'm getting exactly the right set of jobs
             }
 
             getRidOfDuplicates();
@@ -276,7 +153,10 @@ namespace Hunters
         }
 
 
-
+        /// <summary>
+        ///     This method scrapes the number of job results from a Indeed search/the page the Driver property is on.
+        /// </summary>
+        /// <returns></returns>
         public int getNumberOfSearchResults()
         {
             var resultElm = Driver.FindElement(By.Id("searchCountPages"));
@@ -288,7 +168,10 @@ namespace Hunters
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elm"></param>
         public void createJobFromWebElement(IWebElement elm)
         {
             try
@@ -324,10 +207,7 @@ namespace Hunters
                 }
                 catch (Exception exp) { }
 
-                //TODO: Get the Date posted field to work correctly
-                //TODO: Get rid of ## reviews in company name field
-                //TODO: Get rid of everything after City, ST in Location field
-                Job holderJob = new Job(splitInfo[1], splitInfo[0], location, refid, link, datePosted, splitInfo[3], isEasyApply);
+                Job holderJob = new Job(company, splitInfo[0], location, refid, link, datePosted, splitInfo[3], isEasyApply);
                 JobResults.Add(holderJob);
             }
             catch (Exception ex) { }
@@ -345,7 +225,7 @@ namespace Hunters
 
 
         /// <summary>
-        ///     This method adds the required params to the search params for LinkedIn.
+        ///     This method adds the required params to the search params for Indeed.
         /// </summary>
         /// <param name="keywords"></param>
         /// <param name="city"></param>
@@ -358,7 +238,7 @@ namespace Hunters
 
 
         /// <summary>
-        ///     This method adds the not required search params to the LinkedIn search url.
+        ///     This method adds the not required search params to the Indeed search url.
         /// </summary>
         /// <param name="jobtitles"></param>
         /// <param name="experiences"></param>

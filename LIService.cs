@@ -42,7 +42,9 @@ namespace Hunters
             List<object> queries = createLIQueries();
             Queries = queries.ToArray();
             FULLURLS = new string[queries.Count];
-            
+
+            //TODO: Check to see how shortened links look for LinkedIn
+
             for (int counter = 0; counter<Queries.Length; counter++)
             {
                 object query = queries[counter];
@@ -177,7 +179,7 @@ namespace Hunters
                             var easyApply = elm.FindElement(By.ClassName("job-result-card__easy-apply-label"));
                             if (easyApply != null)
                             {
-                                string link = elm.FindElement(By.TagName("a")).GetAttribute("href");
+                                string link = (elm.FindElement(By.TagName("a")).GetAttribute("href")).Split(new string[] { "?refId" }, StringSplitOptions.None)[0];
                                 string[] splitInfo = elm.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
                                 string[] refidSplit = ((link.Split(new string[] { "?refId=" }, StringSplitOptions.None))[0]).Split('-');
                                 string refid = refidSplit[refidSplit.Length - 1];
