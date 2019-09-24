@@ -297,7 +297,26 @@ namespace Hunters
                 string link = "https://www.indeed.com/viewjob?jk=" + refid;
                 string[] splitInfo = elm.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 bool isEasyApply = false;
+                string[] locationSplit = splitInfo[2].Split(' ');
+                string location = locationSplit[0] + ' ' + locationSplit[1];
+                string company = splitInfo[1];
+                if (company.Contains("review"))
+                {
+                    string[] companySplit = company.Split(' ');
+                    int length = companySplit.Length - 2;
+                    company = companySplit[0] + ' ';
+                    for (int a = 1; a < length; a++) company += companySplit[a] + ' ';
+                }
 
+                string datePosted = splitInfo[4];
+                if (datePosted.Contains("day"))
+                {
+                    string[] datePostedSplit = datePosted.Split(new string[] { "day" }, StringSplitOptions.None);
+                    datePosted = datePostedSplit[0] + "days";
+                } else
+                {
+                    datePosted = "";
+                }
                 try
                 {
                     var easyApplyButton = elm.FindElement(By.ClassName("iaLabel"));                   
@@ -305,9 +324,10 @@ namespace Hunters
                 }
                 catch (Exception exp) { }
 
-                //TODO: Need to find a better way to tell when job was posted
-                //TODO: Need to do general formatting for every column
-                Job holderJob = new Job(splitInfo[1], splitInfo[0], splitInfo[2], refid, link, splitInfo[4], splitInfo[3], isEasyApply);
+                //TODO: Get the Date posted field to work correctly
+                //TODO: Get rid of ## reviews in company name field
+                //TODO: Get rid of everything after City, ST in Location field
+                Job holderJob = new Job(splitInfo[1], splitInfo[0], location, refid, link, datePosted, splitInfo[3], isEasyApply);
                 JobResults.Add(holderJob);
             }
             catch (Exception ex) { }
