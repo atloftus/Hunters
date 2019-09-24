@@ -6,7 +6,7 @@ using System.Text;
 namespace Hunters
 {
     /// <summary>
-    ///     This class houses all of the properties of a Job posting from LinkedIN which correlate to a row in the 
+    ///     This class houses all of the properties of a Job posting from LinkedIN & Indeed which correlate to a row in the 
     ///     resulting Google Sheet.
     /// </summary>
     public class Job
@@ -79,6 +79,47 @@ namespace Hunters
         {
             IsEasyApply = iseasyapply;
         }
+
+
+        /// <summary>
+        ///     This is the accessory constructor that takes in a Google Sheets row and serializes it to a Job object.
+        /// </summary>
+        /// <param name="row"></param>
+        public Job(IList<object> row) : this((string)row[0], (string)row[2], (string)row[1], (string)row[8], (string)row[7], (string)row[4], (string)row[6], (bool)row[3])
+        {
+            if (((string)row[9] == "") || ((string)row[9] == " ")) DateApplied = "";
+            else DateApplied = (string)row[9];
+        }
+        #endregion
+
+
+
+        #region METHODS
+        /// <summary>
+        ///     This method prints out all of the properties of the given job to the console.
+        /// </summary>
+        public void printJob()
+        {
+            Console.WriteLine("----------JOB: " + RefID + "----------");
+            Console.WriteLine("Position: " + Position);
+            Console.WriteLine("Company: " + CompanyName);
+            Console.WriteLine("Location: " + Location);
+            Console.WriteLine("Date Posted To Site: " + DatePosted);
+            Console.WriteLine("Date Applied: " + DateApplied);
+            Console.WriteLine("Date Added To Sheet: " + DateAddedToSheet);
+            Console.WriteLine("Link: " + Link);
+            Console.WriteLine("IsEasyApply: " + IsEasyApply);
+            Console.WriteLine("RefId: " + RefID);
+            Console.WriteLine("Website: " + Website);
+            Console.WriteLine("-----------------------");
+        }
+
+
+        /// <summary>
+        ///     This method serializes the given job object to an IList<object> so it can be entered into Google Sheets.
+        /// </summary>
+        /// <returns></returns>
+        public IList<object> toSheetsRow() { return new List<object>() { CompanyName, Location, Position, IsEasyApply, DatePosted, DateAddedToSheet, Details, Link, RefID, Website, DateApplied }; }
         #endregion
     }
 }
