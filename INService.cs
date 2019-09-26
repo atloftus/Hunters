@@ -27,6 +27,9 @@ namespace Hunters
 
 
         #region CONSTRUCTORS
+        /// <summary>
+        ///     This is the default constructor for the INService class which creates all the Indeed querys and links.
+        /// </summary>
         public INService()
         {
             //TODO: Possibly add some sort of location resolution (maybe a library)
