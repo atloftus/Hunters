@@ -133,7 +133,7 @@ namespace Hunters
                 Thread.Sleep(2000);
                 System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> holderJobCards = Driver.FindElement(By.XPath("/ html / body / table[2] / tbody / tr / td / table / tbody / tr / td[2]")).FindElements(By.TagName("div"));
                 foreach(IWebElement elm in holderJobCards)
-                {
+                {2
                     if (elm.GetAttribute("class") == "jobsearch-SerpJobCard unifiedRow row result clickcard") createJobFromWebElement(elm);
                 }
 
@@ -172,7 +172,7 @@ namespace Hunters
 
 
         /// <summary>
-        /// 
+        ///     This method takes in a row elemenet from a google sheet and serializes it to a new Job and adds the job to JobResults.
         /// </summary>
         /// <param name="elm"></param>
         public void createJobFromWebElement(IWebElement elm)
