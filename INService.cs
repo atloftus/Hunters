@@ -133,7 +133,7 @@ namespace Hunters
                 Thread.Sleep(2000);
                 System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> holderJobCards = Driver.FindElement(By.XPath("/ html / body / table[2] / tbody / tr / td / table / tbody / tr / td[2]")).FindElements(By.TagName("div"));
                 foreach(IWebElement elm in holderJobCards)
-                {2
+                {
                     if (elm.GetAttribute("class") == "jobsearch-SerpJobCard unifiedRow row result clickcard") createJobFromWebElement(elm);
                 }
 
@@ -148,6 +148,7 @@ namespace Hunters
                         if (elm.GetAttribute("class") == "jobsearch-SerpJobCard unifiedRow row result clickcard") createJobFromWebElement(elm);
                     }
                 }
+
                 //TODO: Need to add some error checking to make sure that I'm getting exactly the right set of jobs
             }
 
