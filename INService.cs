@@ -200,10 +200,7 @@ namespace Hunters
                 {
                     string[] datePostedSplit = datePosted.Split(new string[] { "day" }, StringSplitOptions.None);
                     datePosted = datePostedSplit[0] + "days";
-                } else
-                {
-                    datePosted = "";
-                }
+                } else datePosted = "";
                 try
                 {
                     var easyApplyButton = elm.FindElement(By.ClassName("iaLabel"));                   
