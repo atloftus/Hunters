@@ -1,1 +1,12 @@
-Software Engineering.Chicago.Illinois.fulltime.entry.day.false
+Software Engineering.Chicago.Illinois.fulltime.entry.month.false
+Software Engineering.Chicago.Illinois.parttime.entry.month.false
+Software Engineering.Chicago.Illinois.contract.entry.month.false
+Software Engineering.Chicago.Illinois.fulltime.associate.month.false
+Software Engineering.Chicago.Illinois.parttime.associate.month.false
+Software Engineering.Chicago.Illinois.contract.associate.month.false
+Devloper.Chicago.Illinois.fulltime.entry.month.false
+Devloper.Chicago.Illinois.parttime.entry.month.false
+Devloper.Chicago.Illinois.contract.entry.month.false
+Devloper.Chicago.Illinois.fulltime.associate.month.false
+Devloper.Chicago.Illinois.parttime.associate.month.false
+Devloper.Chicago.Illinois.contract.associate.month.false

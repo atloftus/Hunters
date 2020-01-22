@@ -1,0 +1,25 @@
+1:
+Software Engineer
+Developer
+
+2/3:
+Chicago.Illionois
+
+Minneapolis.Minnesota
+New York City.New York
+Los Angeles.California
+
+4:
+fulltime
+contract 
+parttime
+
+5:
+entry
+associate
+
+6:
+month
+
+7:
+false
